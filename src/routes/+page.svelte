@@ -1,12 +1,19 @@
 <script lang="ts">
+	import '../app.css'
+	import '../css/basic-styles.css';
 	import { t, locale } from 'svelte-i18n';
 
 	function switchLocale(lang: string) {
 		locale.set(lang);
 	}
+	
+	import Header from '../components/Header.svelte';
+	import BodyTop from '../components/BodyTop.svelte';
+	import Footer from '../components/Footer.svelte';
 </script>
 
-<h1>{$t('title')}</h1>
-
-<button on:click={() => switchLocale('es')}> Switch to Spanish </button>
-<button on:click={() => switchLocale('en')}> Switch to English </button>
+<div class="Container">
+	<Header />
+	<BodyTop />
+	<Footer />
+</div>
