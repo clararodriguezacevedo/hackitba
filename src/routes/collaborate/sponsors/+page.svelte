@@ -2,12 +2,18 @@
 	// @ts-nocheck
 
 	import GoBack from '../../../components/GoBack.svelte';
-	const initialFormState = { name: '', email: '', phone: '' };
+	const initialFormState = { companyName: '', name: '', email: '', phone: '' };
 
 	// let formData = { ...initialFormState };
 	let formData = { ...initialFormState };
 
 	let formTemplate = [
+		{
+			title: 'companyName',
+			prompt: 'Nombre de la empresa:',
+			type: 'text',
+			required: true
+		},
 		{
 			title: 'name',
 			prompt: 'Nombre completo:',
@@ -30,31 +36,39 @@
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		console.log(formData);
-		formData = { ...initialFormState };
+
+        let {companyName, name, email, phone} = formData
+
+        let message = `You have registered to participate as a sponsor in the next edition of HackITBA. We will reach out to you as soon as possible.`
+
+        const response = await fetch("/api/email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, phone, companyName, role: "sponsor", email, subject: "Confirmation", message }),
+        });
+
+        const result = await response.json();
+        let successMessage = result.status === "success" ? "Email sent successfully!" : "Error sending email."
+        console.log(successMessage)
+        formData = { ...initialFormState };
 	}
+
+
+
+
 </script>
 
 <div class="w-100 bg-hackit-grey flex flex-col text-[white]">
-	<GoBack prevUrl="/login" />
+	<GoBack prevUrl="/collaborate" />
 	<div class="mx-auto my-10 max-w-3xl space-y-8">
 		<div class="space-y-8 px-2">
-			<h2 class=" text-center text-lg">Inscripción para Mentores y Jurados - HackITBA 2025</h2>
+			<h2 class=" text-center text-lg">Inscripción para Sponsors - HackITBA 2025</h2>
 			<p>
-				¡Gracias por tu interés en ser parte de HackITBA 2025! Estamos buscando mentores y jurados
-				que nos ayuden a hacer de esta hackatón una experiencia inolvidable para los participantes.
+				¡Gracias por tu interés en ser parte de HackITBA 2025! <br /><br />Estamos buscando sponsors
+				que nos ayuden a hacer de esta hackatón una experiencia inolvidable.
+				<br /><br />Por favor completa el formulario con tus datos. Nos pondremos en contacto
+				contigo.
 			</p>
-			<ol class="list-disc pl-4">
-				<li>
-					Como mentor, guiarás a los equipos durante la competencia, ofrecerás feedback sobre sus
-					proyectos y participarás en la preselección de los finalistas.
-				</li>
-				<li>
-					Como jurado, evaluarás a los equipos finalistas durante sus presentaciones (pitch) y
-					ayudarás a elegir al proyecto ganador.
-				</li>
-			</ol>
-			<p>Por favor completa el formulario con tus datos. Nos pondremos en contacto contigo.</p>
 		</div>
 
 		<form

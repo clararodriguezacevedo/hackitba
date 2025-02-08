@@ -10,10 +10,10 @@
 		</div>
 		<div class="w-fit space-x-12">
 			<button>
-				<a href="/login/mentors" class="hover:text-hackit-green text-3xl text-[white]"> Mentor </a>
+				<a href="/collaborate/mentors" class="hover:text-hackit-green text-3xl text-[white]"> Mentor </a>
 			</button>
 			<button>
-				<a href="/login/sponsors" class="hover:text-hackit-green text-3xl text-[white]">
+				<a href="/collaborate/sponsors" class="hover:text-hackit-green text-3xl text-[white]">
 					Sponsor
 				</a></button
 			>

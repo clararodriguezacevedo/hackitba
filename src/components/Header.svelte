@@ -13,8 +13,8 @@
 		<a href="https://www.hackitba.com.ar/" target="_blank" class="HeaderText-small">
 			Past Editions
 		</a>
-		<a href="/login" class="flex">
-			<button class="SignUpButton m-0"> Sign Up </button>
+		<a href="/collaborate" class="flex">
+			<button class="SignUpButton m-0"> Collaborate </button>
 		</a>
 	</div>
 </div>
